@@ -1,11 +1,13 @@
-using UnityEngine;
 /// 
 /// Script to handle switching panels (pages of UI) by enabling/ disabling them
 /// Made by Gracie Arianne Peh (S10265899G) 9/12/25
 /// 
+
+
+
+using UnityEngine;
 public class UIManager : MonoBehaviour
 {
-    [Header("Panels")]
     public GameObject startPanel;
     public GameObject loginPanel;
     public GameObject signupPanel;
