@@ -1,7 +1,7 @@
 /// 
 /// Script to handle collection of toy and food and logging of mood
 /// Made by Gracie Arianne Peh (S10265899G) 10/12/25 (no database yet)
-/// Heavily referenced chatGPT 
+/// Heavily referenced chatGPT because there were so many bugs and so many things i had no idea how to do properly
 /// 
 
 

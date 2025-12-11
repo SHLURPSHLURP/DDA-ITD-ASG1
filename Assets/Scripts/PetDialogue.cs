@@ -12,9 +12,14 @@ public class PetDialogue : MonoBehaviour
     public TMP_Text textBox;
     public string[] lines;
 
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(CycleLines());
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     IEnumerator CycleLines()

@@ -5795,12 +5795,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedImageManager: {fileID: 1197893655}
   placeablePrefabs:
-  - {fileID: 2220593610947312615, guid: 32a2e9a40e86f50449ddcc496af17960, type: 3}
-  - {fileID: 2794891816447296063, guid: 6bf7143b0f07b49468f423044c2e3dab, type: 3}
-  - {fileID: 3373021612791417335, guid: a6fc1777634eea14d8b62eb5c6d31df9, type: 3}
-  - {fileID: 7684100282691787207, guid: b989f11dc9a882c47a81efaa4d3e7cc0, type: 3}
+  - {fileID: 6918955424461006020, guid: 32a2e9a40e86f50449ddcc496af17960, type: 3}
+  - {fileID: 4628869137459064030, guid: a6fc1777634eea14d8b62eb5c6d31df9, type: 3}
+  - {fileID: 6429784165306433242, guid: 6bf7143b0f07b49468f423044c2e3dab, type: 3}
+  - {fileID: 1803027270095509590, guid: 27220cea01d27014399a7cac230e8a3d, type: 3}
   - {fileID: 3433590759867479358, guid: 7e166b14823a3c041a807bcf5a693d3b, type: 3}
-  - {fileID: 8479472884818362850, guid: 27220cea01d27014399a7cac230e8a3d, type: 3}
+  - {fileID: 803325523312940790, guid: b989f11dc9a882c47a81efaa4d3e7cc0, type: 3}
 --- !u!114 &1197893655
 MonoBehaviour:
   m_ObjectHideFlags: 0

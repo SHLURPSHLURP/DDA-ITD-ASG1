@@ -1,3 +1,10 @@
+/// 
+/// Script to handle tracking multiple images
+/// Made by Gracie Arianne Peh (S10265899G) 9/12/25
+/// ChatGPT for debugging purposes because i was at my wits end
+/// 
+
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
