@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 408018452997457973}
   - component: {fileID: 5712450447492891559}
   - component: {fileID: 5629926870446316345}
+  - component: {fileID: 7398785248839237905}
+  - component: {fileID: 3805483550614686451}
   m_Layer: 0
   m_Name: foodClone
   m_TagString: FoodClone
@@ -132,8 +134,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -217,7 +219,7 @@ MonoBehaviour:
   m_SnapToColliderVolume: 1
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
-  m_MovementType: 0
+  m_MovementType: 2
   m_PredictedVisualsTransform: {fileID: 0}
   m_VelocityDamping: 1
   m_VelocityScale: 1
@@ -264,3 +266,30 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
+--- !u!114 &7398785248839237905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3333008003137138865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4736b6ef31190834981fc8b2c8d1164a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapZone: {fileID: 0}
+  snapStrength: 4
+--- !u!114 &3805483550614686451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3333008003137138865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab155e1d63bb49143b4d54afd3cc83a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumeDistance: 0.15

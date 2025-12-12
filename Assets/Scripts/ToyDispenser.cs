@@ -4,17 +4,20 @@
 /// 
 
 
-
 using UnityEngine;
 
 public class ToyDispenser : MonoBehaviour
 {
     public GameObject toyClonePrefab;
 
-    void OnMouseDown()
+    public void SpawnToy()
     {
-        // Spawn clone at same position
-        Instantiate(toyClonePrefab, transform.position, transform.rotation);
+        if (GameManager.Instance.toy <= 0) return;
+
+        Instantiate(
+            toyClonePrefab,
+            transform.position + Vector3.up * 0.05f,
+            Quaternion.identity
+        );
     }
 }
-
