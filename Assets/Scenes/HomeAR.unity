@@ -6202,6 +6202,7 @@ MonoBehaviour:
   score: 0
   petType: base
   evolutionStage: 0
+  petPresent: 0
   loggedMoods: []
 --- !u!1001 &1362734343
 PrefabInstance:

@@ -1,9 +1,3 @@
-/// 
-/// Script to handle card tracking and spawning of prefabs yipee
-/// Made by Gracie Arianne Peh (S10265899G) 10/12/25
-/// 
-
-
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -16,15 +10,16 @@ public class CardTrackingManager : MonoBehaviour
     [Header("Prefabs must match image names EXACTLY")]
     public GameObject[] placeablePrefabs;
 
-    private Dictionary<string, GameObject> prefabLookup = new Dictionary<string, GameObject>();
-    private Dictionary<string, GameObject> spawnedObjects = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> prefabLookup = new();
+    private Dictionary<string, GameObject> spawnedObjects = new();
+
+    // Images that have already been used
+    private HashSet<string> consumedImages = new();
 
     void Awake()
     {
         foreach (GameObject prefab in placeablePrefabs)
-        {
             prefabLookup[prefab.name] = prefab;
-        }
     }
 
     void OnEnable()
@@ -54,42 +49,60 @@ public class CardTrackingManager : MonoBehaviour
         if (img.referenceImage == null)
             return;
 
-        string name = img.referenceImage.name;
-        if (string.IsNullOrEmpty(name))
+        string imageName = img.referenceImage.name;
+
+        // 🚫 Already consumed → ignore forever
+        if (consumedImages.Contains(imageName))
             return;
+
+        if (!prefabLookup.ContainsKey(imageName))
+            return;
+
+        if (!spawnedObjects.ContainsKey(imageName))
+            spawnedObjects[imageName] = Instantiate(prefabLookup[imageName]);
+
+        GameObject obj = spawnedObjects[imageName];
 
         if (img.trackingState != TrackingState.Tracking)
         {
-            HideImage(img);
+            obj.SetActive(false);
             return;
         }
 
-        Vector3 pos = img.transform.position;
-        Quaternion rot = img.transform.rotation;
-
-        if (!spawnedObjects.ContainsKey(name))
-        {
-            if (!prefabLookup.ContainsKey(name)) return;
-
-            GameObject newObj = Instantiate(prefabLookup[name], pos, rot);
-            spawnedObjects[name] = newObj;
-        }
-
-        GameObject obj = spawnedObjects[name];
         obj.SetActive(true);
-        float offsetY = 0.02f;   // adjust as needed
-        obj.transform.SetPositionAndRotation(pos + new Vector3(0, offsetY, 0), rot);
+        obj.transform.SetPositionAndRotation(
+            img.transform.position + Vector3.up * 0.02f,
+            img.transform.rotation
+        );
 
+        // Pet presence
+        if (imageName == "PetCard")
+            GameManager.Instance.petPresent = true;
     }
 
     void HideImage(ARTrackedImage img)
     {
-        if (img.referenceImage == null) return;
+        if (img.referenceImage == null)
+            return;
 
-        string name = img.referenceImage.name;
-        if (string.IsNullOrEmpty(name)) return;
+        string imageName = img.referenceImage.name;
 
-        if (spawnedObjects.ContainsKey(name))
-            spawnedObjects[name].SetActive(false);
+        if (spawnedObjects.ContainsKey(imageName))
+            spawnedObjects[imageName].SetActive(false);
+
+        if (imageName == "PetCard")
+            GameManager.Instance.petPresent = false;
+    }
+
+    // 🔑 CALLED BY CardAction BEFORE REMOVAL
+    public void MarkImageAsConsumed(string imageName)
+    {
+        consumedImages.Add(imageName);
+
+        if (spawnedObjects.ContainsKey(imageName))
+        {
+            Destroy(spawnedObjects[imageName]);
+            spawnedObjects.Remove(imageName);
+        }
     }
 }

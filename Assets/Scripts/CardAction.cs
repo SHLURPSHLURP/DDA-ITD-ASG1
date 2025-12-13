@@ -1,15 +1,8 @@
-/// 
-/// Script to handle collection of toy and food and logging of mood
-/// Made by Gracie Arianne Peh (S10265899G) 10/12/25 (no database yet)
-/// Heavily referenced chatGPT because there were so many bugs and so many things i had no idea how to do properly
-/// 
-
-
 using UnityEngine;
 
 public class CardAction : MonoBehaviour
 {
-    public enum CardActionType //chatgpt generated i did not know how to do this 
+    public enum CardActionType
     {
         CollectFood,
         CollectToy,
@@ -17,43 +10,76 @@ public class CardAction : MonoBehaviour
         PetInteraction
     }
 
+    public CardActionType actionType;
 
-    public CardActionType actionType;  // This should show as a dropdown
-    public string mood;                // Only used for LogMood
+    [Header("Mood Only")]
+    public string mood;
+    public string imageName;
 
     public void ExecuteAction()
     {
         switch (actionType)
         {
+            case CardActionType.LogMood:
+                HandleLogMood();
+                break;
+
             case CardActionType.CollectFood:
                 GameManager.Instance.food++;
-                Debug.Log("Food collected! Food: " + GameManager.Instance.food);
+                HideButtonCanvas();
                 break;
 
             case CardActionType.CollectToy:
                 GameManager.Instance.toy++;
-                Debug.Log("Toy collected! Toys: " + GameManager.Instance.toy);
-                break;
-
-            case CardActionType.LogMood:
-                if (!string.IsNullOrEmpty(mood))
-                {
-                    GameManager.Instance.loggedMoods.Add(mood);
-                    GameManager.Instance.moodCounts[mood]++;
-                    Debug.Log("Mood logged: " + mood);
-                }
+                HideButtonCanvas();
                 break;
 
             case CardActionType.PetInteraction:
-                // Load your feed/play scene here
                 UnityEngine.SceneManagement.SceneManager.LoadScene("FeedPlayScene");
+                HideButtonCanvas();
                 break;
         }
+    }
 
-        // Hide this button's parent (usually the world-space canvas)
-        if (transform.parent != null)
+    void HandleLogMood()
+    {
+        // ❌ Require pet
+        if (!GameManager.Instance.petPresent)
         {
-            transform.parent.gameObject.SetActive(false);
+            Debug.Log("Pet not present. Scan PetCard first.");
+            return;
         }
+
+        if (string.IsNullOrEmpty(mood))
+            return;
+
+        // ✅ Log mood
+        GameManager.Instance.loggedMoods.Add(mood);
+        GameManager.Instance.moodCounts[mood]++;
+        Debug.Log("Mood logged: " + mood);
+
+        // 🔍 Scale pulse reaction
+        PetScalePulse pulse = FindObjectOfType<PetScalePulse>();
+        if (pulse != null)
+        {
+            pulse.PlayPulse();
+        }
+        else
+        {
+            Debug.Log("PetScalePulse not found on PetCard.");
+        }
+
+        // ✅ Remove mood card safely
+        CardTrackingManager tracker = FindObjectOfType<CardTrackingManager>();
+        if (tracker != null)
+        {
+            tracker.MarkImageAsConsumed(imageName);
+        }
+    }
+
+    void HideButtonCanvas()
+    {
+        if (transform.parent != null)
+            transform.parent.gameObject.SetActive(false);
     }
 }

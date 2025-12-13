@@ -528,3 +528,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionType: 2
   mood: happy
+  imageName: HappyCard

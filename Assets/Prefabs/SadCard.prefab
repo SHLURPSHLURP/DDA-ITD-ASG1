@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionType: 2
   mood: sad
+  imageName: SadCard
 --- !u!1 &1645004526067752160
 GameObject:
   m_ObjectHideFlags: 0
