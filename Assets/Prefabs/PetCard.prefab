@@ -320,8 +320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f5402a0b0e3894caa396d30a495c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 360
-  spinDuration: 0.5
+  pulseScale: 1.05
+  pulseDuration: 0.25
+  pauseBetweenPulses: 0.08
 --- !u!1 &4692675385333025529
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,12 +609,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBox: {fileID: 3817305986320982300}
-  lines:
-  - How are you feeling today?
-  - I'm bored...
-  - I'll log your mood for you anytime- just scan a mood card!
-  - Press Feed/Play to keep me company :)
-  - Remember to feed me :3
+  idleLines:
+  - How are you today?
+  - Tap the i icon if you get confused
+  - Remember to feed me...
+  idleInterval: 3
+  moodLoggedLine: I'll remember that :)
 --- !u!1 &5843079124148607623
 GameObject:
   m_ObjectHideFlags: 0

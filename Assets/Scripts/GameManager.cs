@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int evolutionStage = 0;
 
     public bool petPresent = false;
+    public bool moodLoggedToday = false;
 
     public List<string> loggedMoods = new();
     public Dictionary<string, int> moodCounts = new()
@@ -35,5 +36,25 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void LogMood(string mood)
+    {
+        loggedMoods.Add(mood);
+        moodCounts[mood]++;
+        moodLoggedToday = true;
+    }
+
+    public void NextDay()
+    {
+        moodLoggedToday = false;
+
+        if (food > 0)
+            food--;
+        else
+            hunger--;
+
+        hunger = Mathf.Clamp(hunger, 0, 3);
+        Debug.Log("Next day. Hunger: " + hunger);
     }
 }
