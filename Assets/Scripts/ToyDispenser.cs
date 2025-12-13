@@ -12,7 +12,7 @@ public class ToyDispenser : MonoBehaviour
 
     public void SpawnToy()
     {
-        if (GameManager.Instance.toy <= 0) return;
+        if (GameState.Instance.toy <= 0) return;
 
         Instantiate(
             toyClonePrefab,

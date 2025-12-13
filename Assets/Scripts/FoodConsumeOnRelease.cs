@@ -43,7 +43,7 @@ public class FoodConsumeOnRelease : MonoBehaviour
         Debug.Log("Food eaten");
 
         // Update game data
-        GameManager.Instance.food--;
+        GameState.Instance.food--;
 
         // Trigger pet reaction (spin)
         PetSpinReaction pet = GameObject.FindObjectOfType<PetSpinReaction>();

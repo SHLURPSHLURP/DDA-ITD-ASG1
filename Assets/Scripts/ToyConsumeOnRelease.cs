@@ -35,8 +35,8 @@ public class ToyConsumeOnRelease : MonoBehaviour
     {
         Debug.Log("Toy used!");
 
-        GameManager.Instance.toy--;
-        GameManager.Instance.score += 1;   // 🎉 play increases score
+        GameState.Instance.toy--;
+        GameState.Instance.score += 1;   // 🎉 play increases score
 
         PetSpinReaction pet = GameObject.FindObjectOfType<PetSpinReaction>();
         if (pet != null)

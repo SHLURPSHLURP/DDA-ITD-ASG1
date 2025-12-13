@@ -14,7 +14,7 @@ public class FoodDispenser : MonoBehaviour
 
     public void SpawnFood()
     {
-        if (GameManager.Instance.food <= 0) return;
+        if (GameState.Instance.food <= 0) return;
 
         Instantiate(
             foodClonePrefab,

@@ -495,7 +495,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568749}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
         m_MethodName: CreateAccount
         m_Mode: 1
@@ -1056,7 +1056,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568750}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PetManager, Assembly-CSharp
         m_MethodName: FeedPet
         m_Mode: 1
@@ -2153,7 +2153,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568747}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ShowLoginPanel
         m_Mode: 1
@@ -2286,7 +2286,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568747}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ShowLoginPanel
         m_Mode: 1
@@ -5799,7 +5799,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568747}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ShowInfoPanel
         m_Mode: 1
@@ -5932,7 +5932,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568747}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ShowHomePanel
         m_Mode: 1
@@ -6065,7 +6065,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568747}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ShowSignupPanel
         m_Mode: 1
@@ -6312,7 +6312,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568750}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PetManager, Assembly-CSharp
         m_MethodName: PlayWithPet
         m_Mode: 1
@@ -6540,93 +6540,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010339155}
   m_CullTransparentMesh: 1
---- !u!1 &2011568746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2011568748}
-  - component: {fileID: 2011568747}
-  - component: {fileID: 2011568749}
-  - component: {fileID: 2011568750}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2011568747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011568746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dc45f0c32b3a446b400a757f760d28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPanel: {fileID: 1894424945}
-  loginPanel: {fileID: 1712358252}
-  signupPanel: {fileID: 864029006}
-  homePanel: {fileID: 601086199}
-  infoPanel: {fileID: 978571924}
---- !u!4 &2011568748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011568746}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2011568749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011568746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c304f52ec926b34ba8e8f42129dbbd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loginEmail: {fileID: 1121929112}
-  loginPassword: {fileID: 1386795199}
-  loginErrorText: {fileID: 1653238929}
-  signupEmail: {fileID: 2013628321}
-  signupPassword: {fileID: 2010339157}
-  signupConfirm: {fileID: 674345653}
-  signupErrorText: {fileID: 1773759671}
-  uiManager: {fileID: 2011568747}
---- !u!114 &2011568750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011568746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00ffea8833816c74c9890858676116d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hunger: 3
-  score: 0
-  hungerText: {fileID: 1380825368}
-  scoreText: {fileID: 161896249}
 --- !u!1 &2013628319
 GameObject:
   m_ObjectHideFlags: 0
@@ -7024,7 +6937,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011568749}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
         m_MethodName: LogIn
         m_Mode: 1
@@ -7325,4 +7238,3 @@ SceneRoots:
   - {fileID: 1727868665}
   - {fileID: 2117759333}
   - {fileID: 1296288766}
-  - {fileID: 2011568748}

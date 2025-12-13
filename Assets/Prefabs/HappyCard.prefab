@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 8528153289578564597}
   - component: {fileID: 5451735420152024407}
   - component: {fileID: 4746429315405113597}
-  - component: {fileID: 1782111692327066193}
+  - component: {fileID: 414985278440728564}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1782111692327066193}
+      - m_Target: {fileID: 414985278440728564}
         m_TargetAssemblyTypeName: CardAction, Assembly-CSharp
         m_MethodName: ExecuteAction
         m_Mode: 1
@@ -514,7 +514,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1782111692327066193
+--- !u!114 &414985278440728564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

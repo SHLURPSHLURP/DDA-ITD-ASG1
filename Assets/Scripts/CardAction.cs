@@ -1,49 +1,93 @@
 using UnityEngine;
-using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+public class CardAction : MonoBehaviour
 {
-    public static GameManager Instance;
-
-    public int food = 0;
-    public int toy = 0;
-
-    public int hunger = 3;
-    public int score = 0;
-
-    public string petType = "base";
-    public int evolutionStage = 0;
-
-    public bool petPresent = false;
-
-    // 🔑 NEW
-    public bool moodLoggedToday = false;
-
-    public List<string> loggedMoods = new();
-    public Dictionary<string, int> moodCounts = new()
+    public enum CardActionType
     {
-        { "happy", 0 },
-        { "sad", 0 },
-        { "calm", 0 }
-    };
+        CollectFood,
+        CollectToy,
+        LogMood,
+        PetInteraction
+    }
 
-    void Awake()
+    public CardActionType actionType;
+
+    [Header("Mood Only")]
+    public string mood;
+    public string imageName;
+
+    public void ExecuteAction()
     {
-        if (Instance == null)
+        switch (actionType)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            case CardActionType.LogMood:
+                HandleLogMood();
+                break;
+
+            case CardActionType.CollectFood:
+                GameState.Instance.food++;
+                HideButtonCanvas();
+                break;
+
+            case CardActionType.CollectToy:
+                GameState.Instance.toy++;
+                HideButtonCanvas();
+                break;
+
+            case CardActionType.PetInteraction:
+                UnityEngine.SceneManagement.SceneManager.LoadScene("FeedPlayScene");
+                HideButtonCanvas();
+                break;
         }
     }
 
-    public void LogMood(string mood)
+    void HandleLogMood()
     {
-        loggedMoods.Add(mood);
-        moodCounts[mood]++;
-        moodLoggedToday = true;
+        // ❌ Require pet
+        if (!GameState.Instance.petPresent)
+        {
+            Debug.Log("Pet not present. Scan PetCard first.");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(mood))
+            return;
+
+        // ✅ Log mood
+        GameState.Instance.loggedMoods.Add(mood);
+        GameState.Instance.moodCounts[mood]++;
+        Debug.Log("Mood logged: " + mood);
+
+        // Trigger pet dialogue override
+        PetDialogue dialogue = FindObjectOfType<PetDialogue>();
+        if (dialogue != null)
+        {
+            dialogue.SayMoodLogged();
+        }
+
+
+        // 🔍 Scale pulse reaction
+        PetScalePulse pulse = FindObjectOfType<PetScalePulse>();
+        if (pulse != null)
+        {
+            pulse.PlayPulse();
+        }
+        else
+        {
+            Debug.Log("PetScalePulse not found on PetCard.");
+        }
+
+        // ✅ Remove mood card safely
+        CardTrackingManager tracker = FindObjectOfType<CardTrackingManager>();
+        if (tracker != null)
+        {
+            tracker.MarkImageAsConsumed(imageName);
+        }
+    }
+
+    void HideButtonCanvas()
+    {
+        if (transform.parent != null)
+            transform.parent.gameObject.SetActive(false);
     }
 }

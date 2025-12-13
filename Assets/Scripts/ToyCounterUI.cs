@@ -14,7 +14,7 @@ public class ToyCounterUI : MonoBehaviour
 
     void Update()
     {
-        text.text = "Toy: " + GameManager.Instance.toy;
+        text.text = "Toy: " + GameState.Instance.toy;
     }
 }
 

@@ -77,7 +77,7 @@ public class CardTrackingManager : MonoBehaviour
 
         // Pet presence
         if (imageName == "PetCard")
-            GameManager.Instance.petPresent = true;
+            GameState.Instance.petPresent = true;
     }
 
     void HideImage(ARTrackedImage img)
@@ -91,7 +91,7 @@ public class CardTrackingManager : MonoBehaviour
             spawnedObjects[imageName].SetActive(false);
 
         if (imageName == "PetCard")
-            GameManager.Instance.petPresent = false;
+            GameState.Instance.petPresent = false;
     }
 
     // 🔑 CALLED BY CardAction BEFORE REMOVAL

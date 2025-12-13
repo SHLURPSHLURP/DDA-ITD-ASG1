@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+public class GameState : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameState Instance;
 
     public int food = 0;
     public int toy = 0;
@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
             hunger--;
 
         hunger = Mathf.Clamp(hunger, 0, 3);
+
         Debug.Log("Next day. Hunger: " + hunger);
     }
 }

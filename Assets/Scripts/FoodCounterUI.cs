@@ -14,6 +14,6 @@ public class FoodCounterUI : MonoBehaviour
 
     void Update()
     {
-        text.text = "Food: " + GameManager.Instance.food;
+        text.text = "Food: " + GameState.Instance.food;
     }
 }

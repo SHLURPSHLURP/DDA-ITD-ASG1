@@ -6219,13 +6219,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1362021099}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1362021103}
+        m_TargetAssemblyTypeName: GameState, Assembly-CSharp
+        m_MethodName: NextDay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6279,6 +6279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1362021101}
   - component: {fileID: 1362021102}
+  - component: {fileID: 1362021103}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6317,6 +6318,27 @@ MonoBehaviour:
   score: 0
   hungerText: {fileID: 322148816}
   scoreText: {fileID: 1171967073}
+--- !u!114 &1362021103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362021099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd46bb1c6db5087489e67b3f3d0c51a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: 0
+  toy: 0
+  hunger: 3
+  score: 0
+  petType: base
+  evolutionStage: 0
+  petPresent: 0
+  moodLoggedToday: 0
+  loggedMoods: []
 --- !u!1001 &1362734343
 PrefabInstance:
   m_ObjectHideFlags: 0
