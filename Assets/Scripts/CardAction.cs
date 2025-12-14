@@ -14,7 +14,6 @@ public class CardAction : MonoBehaviour
 
     [Header("Mood Only")]
     public string mood;
-    public string imageName;
 
     public void ExecuteAction()
     {
@@ -43,7 +42,6 @@ public class CardAction : MonoBehaviour
 
     void HandleLogMood()
     {
-        // ❌ Require pet
         if (!GameState.Instance.petPresent)
         {
             Debug.Log("Pet not present. Scan PetCard first.");
@@ -53,41 +51,23 @@ public class CardAction : MonoBehaviour
         if (string.IsNullOrEmpty(mood))
             return;
 
-        // ✅ Log mood
-        GameState.Instance.loggedMoods.Add(mood);
-        GameState.Instance.moodCounts[mood]++;
-        Debug.Log("Mood logged: " + mood);
+        // ✅ Log mood (this also checks evolution)
+        GameState.Instance.LogMood(mood);
 
-        // Trigger pet dialogue override
+        // Pet dialogue
         PetDialogue dialogue = FindObjectOfType<PetDialogue>();
         if (dialogue != null)
-        {
             dialogue.SayMoodLogged();
-        }
 
-
-        // 🔍 Scale pulse reaction
+        // Visual reaction
         PetScalePulse pulse = FindObjectOfType<PetScalePulse>();
         if (pulse != null)
-        {
             pulse.PlayPulse();
-        }
-        else
-        {
-            Debug.Log("PetScalePulse not found on PetCard.");
-        }
 
-        // ✅ Remove mood card safely
-        CardTrackingManager tracker = FindObjectOfType<CardTrackingManager>();
-        if (tracker != null)
-        {
-            tracker.MarkImageAsConsumed(imageName);
-        }
-
+        // Info page update
         InfoPanelUI info = FindObjectOfType<InfoPanelUI>();
         if (info != null)
             info.Refresh();
-
     }
 
     void HideButtonCanvas()

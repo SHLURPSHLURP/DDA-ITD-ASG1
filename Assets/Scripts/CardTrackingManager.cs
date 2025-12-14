@@ -13,9 +13,6 @@ public class CardTrackingManager : MonoBehaviour
     private Dictionary<string, GameObject> prefabLookup = new();
     private Dictionary<string, GameObject> spawnedObjects = new();
 
-    // Images that have already been used
-    private HashSet<string> consumedImages = new();
-
     void Awake()
     {
         foreach (GameObject prefab in placeablePrefabs)
@@ -51,10 +48,6 @@ public class CardTrackingManager : MonoBehaviour
 
         string imageName = img.referenceImage.name;
 
-        // 🚫 Already consumed → ignore forever
-        if (consumedImages.Contains(imageName))
-            return;
-
         if (!prefabLookup.ContainsKey(imageName))
             return;
 
@@ -75,7 +68,6 @@ public class CardTrackingManager : MonoBehaviour
             img.transform.rotation
         );
 
-        // Pet presence
         if (imageName == "PetCard")
             GameState.Instance.petPresent = true;
     }
@@ -92,17 +84,5 @@ public class CardTrackingManager : MonoBehaviour
 
         if (imageName == "PetCard")
             GameState.Instance.petPresent = false;
-    }
-
-    // 🔑 CALLED BY CardAction BEFORE REMOVAL
-    public void MarkImageAsConsumed(string imageName)
-    {
-        consumedImages.Add(imageName);
-
-        if (spawnedObjects.ContainsKey(imageName))
-        {
-            Destroy(spawnedObjects[imageName]);
-            spawnedObjects.Remove(imageName);
-        }
     }
 }
