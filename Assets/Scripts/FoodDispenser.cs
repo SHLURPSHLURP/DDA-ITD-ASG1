@@ -1,26 +1,28 @@
-/// 
-/// Tiny script to spawn draggable clone from "dispenser" food (inspired by pikmin bloom!!!)
-/// Made by Gracie Arianne Peh (S10265899G) 12/12/25
-/// chatgpt reference
-/// 
-
-
-
 using UnityEngine;
 
 public class FoodDispenser : MonoBehaviour
 {
     public GameObject foodClonePrefab;
 
+    [Header("Pet References (drag from PetCard)")]
+    public Transform snapZone;
+    public PetSpinReaction petSpin;
+
     public void SpawnFood()
     {
-        if (GameState.Instance.food <= 0) return;
+        if (GameState.Instance.food <= 0)
+            return;
 
-        Instantiate(
+        GameObject food = Instantiate(
             foodClonePrefab,
             transform.position + Vector3.up * 0.05f,
             Quaternion.identity
         );
+
+        FoodConsumeOnRelease consume = food.GetComponent<FoodConsumeOnRelease>();
+        consume.snapZone = snapZone;
+        consume.petSpin = petSpin;
+
+        GameState.Instance.food--;
     }
 }
-

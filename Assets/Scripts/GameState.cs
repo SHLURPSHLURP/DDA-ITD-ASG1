@@ -57,8 +57,21 @@ public class GameState : MonoBehaviour
     // -------------------------
     public void LogMood(string mood)
     {
+        if (petDead)
+            return;
+
         loggedMoods.Add(mood);
         moodCounts[mood]++;
+
+        // Each mood = 1 day passing
+        hunger--;
+        hunger = Mathf.Clamp(hunger, 0, 3);
+
+        if (hunger == 0)
+        {
+            petDead = true;
+            return;
+        }
 
         CheckEvolution();
     }

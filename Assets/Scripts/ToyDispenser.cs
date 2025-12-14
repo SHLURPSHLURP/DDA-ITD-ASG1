@@ -1,23 +1,28 @@
-/// 
-/// Tiny script to spawn draggable clone from "dispenser" toy (inspired by pikmin bloom!!!)
-/// Made by Gracie Arianne Peh (S10265899G) 11/12/25
-/// 
-
-
 using UnityEngine;
 
 public class ToyDispenser : MonoBehaviour
 {
     public GameObject toyClonePrefab;
 
+    [Header("Pet References (drag from PetCard)")]
+    public Transform snapZone;
+    public PetSpinReaction petSpin;
+
     public void SpawnToy()
     {
-        if (GameState.Instance.toy <= 0) return;
+        if (GameState.Instance.toy <= 0)
+            return;
 
-        Instantiate(
+        GameObject toy = Instantiate(
             toyClonePrefab,
             transform.position + Vector3.up * 0.05f,
             Quaternion.identity
         );
+
+        ToyConsumeOnRelease consume = toy.GetComponent<ToyConsumeOnRelease>();
+        consume.snapZone = snapZone;
+        consume.petSpin = petSpin;
+
+        GameState.Instance.toy--;
     }
 }

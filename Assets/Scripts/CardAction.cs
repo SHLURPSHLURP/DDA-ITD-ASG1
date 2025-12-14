@@ -25,18 +25,13 @@ public class CardAction : MonoBehaviour
 
             case CardActionType.CollectFood:
                 GameState.Instance.food++;
-                HideButtonCanvas();
                 break;
 
             case CardActionType.CollectToy:
                 GameState.Instance.toy++;
-                HideButtonCanvas();
                 break;
 
-            case CardActionType.PetInteraction:
-                UnityEngine.SceneManagement.SceneManager.LoadScene("FeedPlayScene");
-                HideButtonCanvas();
-                break;
+  
         }
     }
 
@@ -79,11 +74,5 @@ public class CardAction : MonoBehaviour
         InfoPanelUI info = FindObjectOfType<InfoPanelUI>();
         if (info != null)
             info.Refresh();
-    }
-
-    void HideButtonCanvas()
-    {
-        if (transform.parent != null)
-            transform.parent.gameObject.SetActive(false);
     }
 }

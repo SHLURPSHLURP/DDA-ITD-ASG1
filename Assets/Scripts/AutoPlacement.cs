@@ -1,10 +1,3 @@
-/// 
-/// Script to place items on the first plane detected automatically
-/// Made by Gracie Arianne Peh (S10265899G) 11/12/25
-/// Some reference to chatGPT
-/// 
-
-
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -12,7 +5,7 @@ using System.Collections.Generic;
 
 public class AutoPlacement : MonoBehaviour
 {
-    public ARRaycastManager raycaster;
+    private ARRaycastManager raycaster;
 
     public GameObject petPrefab;
     public GameObject foodPrefab;
@@ -20,9 +13,20 @@ public class AutoPlacement : MonoBehaviour
 
     private bool placed = false;
 
+    void Start()
+    {
+        // Find raycaster from persistent XR Origin
+        raycaster = FindObjectOfType<ARRaycastManager>();
+
+        if (raycaster == null)
+        {
+            Debug.LogError("ARRaycastManager not found. Make sure XR Origin persists from Home scene.");
+        }
+    }
+
     void Update()
     {
-        if (placed) return;
+        if (placed || raycaster == null) return;
 
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
@@ -35,7 +39,7 @@ public class AutoPlacement : MonoBehaviour
             Vector3 petPos = pose.position + Vector3.up * 0.10f; // lift pet
             GameObject pet = Instantiate(petPrefab, petPos, Quaternion.identity);
 
-            // Ensure pet faces camera slightly (optional but nice)
+            // Face camera
             Vector3 lookDir = Camera.main.transform.forward;
             lookDir.y = 0;
             pet.transform.rotation = Quaternion.LookRotation(lookDir);
@@ -65,4 +69,3 @@ public class AutoPlacement : MonoBehaviour
         }
     }
 }
-
