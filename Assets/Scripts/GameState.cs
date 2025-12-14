@@ -82,6 +82,9 @@ public class GameState : MonoBehaviour
 
         food--;
         hunger = Mathf.Clamp(hunger + 1, 0, 3);
+
+        FirebasePlayerManager.Instance.SaveFromGameState();
+
     }
 
     // -------------------------
@@ -93,6 +96,9 @@ public class GameState : MonoBehaviour
 
         toy--;
         score++;
+
+        FirebasePlayerManager.Instance.SaveFromGameState();
+
     }
 
     // -------------------------
@@ -111,10 +117,12 @@ public class GameState : MonoBehaviour
         if (hunger <= 0)
         {
             petDead = true;
+            FirebasePlayerManager.Instance.SaveFromGameState(); //FIREBASE CRUD
             return;
         }
 
         CheckEvolution();
+        FirebasePlayerManager.Instance.SaveFromGameState(); //FIREBASE CRUD
     }
 
     // -------------------------
@@ -188,4 +196,56 @@ public class GameState : MonoBehaviour
 
         ResetMoodTracking();
     }
+
+
+
+//  FOR DATABASE YIPEE!!! 
+
+
+
+        public PlayerData ToPlayerData()
+    {
+        PlayerData data = new PlayerData();
+
+        data.evolutionStage = evolutionStage;
+        data.stage1Mood = stage1Mood;
+        data.stage2Mood = stage2Mood;
+
+        data.loggedMoods = new List<string>(loggedMoods);
+        data.moodCount = new Dictionary<string, int>(moodCounts);
+
+        data.food = food;
+        data.toy = toy;
+        data.hunger = hunger;
+        data.score = score;
+
+        data.evolutionsCollected = new List<string>(evolutionsCollected);
+
+        return data;
+    }
+
+    public void LoadFromPlayerData(PlayerData data)
+    {
+        evolutionStage = data.evolutionStage;
+        stage1Mood = data.stage1Mood;
+        stage2Mood = data.stage2Mood;
+
+        loggedMoods = new List<string>(data.loggedMoods);
+        moodCounts = new Dictionary<string, int>(data.moodCount);
+
+        food = data.food;
+        toy = data.toy;
+        hunger = data.hunger;
+        score = data.score;
+
+        evolutionsCollected = new List<string>(data.evolutionsCollected);
+    }
+
+    public void ResetPetAndSave()
+    {
+        ResetPet();
+        FirebasePlayerManager.Instance.SaveFromGameState();
+    }
+
+
 }

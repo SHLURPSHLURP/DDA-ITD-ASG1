@@ -23,6 +23,6 @@ public class ToyDispenser : MonoBehaviour
         consume.snapZone = snapZone;
         consume.petSpin = petSpin;
 
-        GameState.Instance.toy--;
+       
     }
 }

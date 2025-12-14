@@ -68,7 +68,7 @@ public class InfoPanelUI : MonoBehaviour
     // -------------------------
     public void ResetPetButton()
     {
-        GameState.Instance.ResetPet();
+        GameState.Instance.ResetPetAndSave();
         Refresh();
     }
 

@@ -22,6 +22,8 @@ public class ToyConsumeOnRelease : MonoBehaviour
         if (Vector3.Distance(transform.position, snapZone.position) <= consumeDistance)
         {
             GameState.Instance.PlayWithPet();
+            
+
             petSpin.Spin();
             Destroy(gameObject);
         }

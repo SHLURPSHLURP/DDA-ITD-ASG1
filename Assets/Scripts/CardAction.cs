@@ -25,10 +25,12 @@ public class CardAction : MonoBehaviour
 
             case CardActionType.CollectFood:
                 GameState.Instance.food++;
+                FirebasePlayerManager.Instance.SaveFromGameState(); 
                 break;
 
             case CardActionType.CollectToy:
                 GameState.Instance.toy++;
+                FirebasePlayerManager.Instance.SaveFromGameState();
                 break;
 
   
@@ -47,6 +49,7 @@ public class CardAction : MonoBehaviour
             {
                 ui.ShowInstruction("Scan your pet card first!");
             }
+            return;
 
         }
 

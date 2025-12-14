@@ -22,6 +22,8 @@ public class FoodConsumeOnRelease : MonoBehaviour
         if (Vector3.Distance(transform.position, snapZone.position) <= consumeDistance)
         {
             GameState.Instance.FeedPet();
+           
+
             petSpin.Spin();
             Destroy(gameObject);
         }
