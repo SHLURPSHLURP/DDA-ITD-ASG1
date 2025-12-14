@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GameState : MonoBehaviour
 {
@@ -54,23 +55,8 @@ public class GameState : MonoBehaviour
     // -------------------------
     public void LogMood(string mood)
     {
-        // if (petDead)
-        //     return;
-
         loggedMoods.Add(mood);
         moodCounts[mood]++;
-
-        // --- Hunger logic DISABLED for testing ---
-        /*
-        hunger--;
-        hunger = Mathf.Clamp(hunger, 0, 3);
-
-        if (hunger == 0)
-        {
-            petDead = true;
-            return;
-        }
-        */
 
         CheckEvolution();
     }
@@ -111,11 +97,11 @@ public class GameState : MonoBehaviour
         evolutionStage = 2;
         finalEvolutionJustHappened = true;
 
-        string finalName = stage1Mood + stage2Mood;
-        evolutionsCollected.Add(finalName);
+        string finalKey = GetFinalMoodKey();
+        evolutionsCollected.Add(finalKey);
         ResetMoodTracking();
 
-        Debug.Log("Final Evolution: " + finalName);
+        Debug.Log("Final Evolution: " + finalKey);
     }
 
     // -------------------------
@@ -146,16 +132,21 @@ public class GameState : MonoBehaviour
         moodCounts["calm"] = 0;
     }
 
+    // 🔑 ORDER-INDEPENDENT FINAL KEY
+    public string GetFinalMoodKey()
+    {
+        List<string> moods = new() { stage1Mood, stage2Mood };
+        moods.Sort(); // alphabetical
+        return $"{moods[0]}_{moods[1]}";
+    }
+
     // -------------------------
-    // RESET PET (FOR FINAL EVOLUTION)
+    // RESET PET
     // -------------------------
     public void ResetPet()
     {
         food = 0;
         toy = 0;
-
-        // hunger = 3;
-        // petDead = false;
 
         evolutionStage = 0;
         stage1Mood = "";
