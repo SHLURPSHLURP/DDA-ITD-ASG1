@@ -5,7 +5,7 @@ public class ToyConsumeOnRelease : MonoBehaviour
 {
     public float consumeDistance = 0.15f;
 
-    [Header("Linked via Inspector")]
+    [Header("Linked in Inspector")]
     public Transform snapZone;
     public PetSpinReaction petSpin;
 
@@ -17,28 +17,13 @@ public class ToyConsumeOnRelease : MonoBehaviour
         grab.selectExited.AddListener(OnReleased);
     }
 
-    void OnDestroy()
-    {
-        if (grab != null)
-            grab.selectExited.RemoveListener(OnReleased);
-    }
-
     void OnReleased(SelectExitEventArgs args)
     {
-        if (snapZone == null || petSpin == null)
-            return;
-
         if (Vector3.Distance(transform.position, snapZone.position) <= consumeDistance)
-            Play();
-    }
-
-    void Play()
-    {
-        Debug.Log("Toy used!");
-
-        GameState.Instance.score += 1;
-
-        petSpin.Spin();
-        Destroy(gameObject);
+        {
+            GameState.Instance.PlayWithPet();
+            petSpin.Spin();
+            Destroy(gameObject);
+        }
     }
 }

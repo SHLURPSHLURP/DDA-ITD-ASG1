@@ -1,26 +1,41 @@
-/// 
-/// Script to handle switching panels (pages of UI) by enabling/ disabling them
-/// Made by Gracie Arianne Peh (S10265899G) 9/12/25
-/// 
-
-
-
 using UnityEngine;
+using TMPro;
+using System.Collections;
+
 public class UIManager : MonoBehaviour
 {
+    [Header("Main Panels")]
     public GameObject startPanel;
     public GameObject loginPanel;
     public GameObject signupPanel;
     public GameObject homePanel;
 
+    [Header("Overlays")]
+    public GameObject deathPanel;
+    public TMP_Text instructionText;
 
+    Coroutine instructionRoutine;
 
     void Start()
     {
-        ShowStartPanel();   // Begin on Start panel
+        ShowStartPanel();
+        HideInstruction();
+        if (deathPanel != null)
+            deathPanel.SetActive(false);
     }
 
-    // disable all first
+    void Update()
+    {
+        // 🔴 Death check (global)
+        if (deathPanel != null)
+        {
+            deathPanel.SetActive(GameState.Instance.petDead);
+        }
+    }
+
+    // -------------------------
+    // PANEL SWITCHING
+    // -------------------------
     private void ShowOnly(GameObject panel)
     {
         startPanel.SetActive(false);
@@ -31,26 +46,41 @@ public class UIManager : MonoBehaviour
         panel.SetActive(true);
     }
 
-// different functions to call in unity ("on click") when switching between panels 
-    public void ShowStartPanel()
+    public void ShowStartPanel() => ShowOnly(startPanel);
+    public void ShowLoginPanel() => ShowOnly(loginPanel);
+    public void ShowSignupPanel() => ShowOnly(signupPanel);
+    public void ShowHomePanel() => ShowOnly(homePanel);
+
+    // -------------------------
+    // INSTRUCTION TEXT
+    // -------------------------
+    public void ShowInstruction(string message, float duration = 2f)
     {
-        ShowOnly(startPanel);
+        if (instructionRoutine != null)
+            StopCoroutine(instructionRoutine);
+
+        instructionRoutine = StartCoroutine(InstructionRoutine(message, duration));
     }
 
-    public void ShowLoginPanel()
+    IEnumerator InstructionRoutine(string msg, float duration)
     {
-        ShowOnly(loginPanel);
+        instructionText.text = msg;
+        instructionText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        HideInstruction();
     }
 
-    public void ShowSignupPanel()
+    void HideInstruction()
     {
-        ShowOnly(signupPanel);
+        instructionText.gameObject.SetActive(false);
     }
 
-    public void ShowHomePanel()
+    // -------------------------
+    // DEATH PANEL BUTTON
+    // -------------------------
+    public void ResetPetFromDeath()
     {
-        ShowOnly(homePanel);
+        GameState.Instance.ResetPet();
+        deathPanel.SetActive(false);
     }
-
-
 }

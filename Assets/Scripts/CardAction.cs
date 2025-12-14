@@ -42,9 +42,12 @@ public class CardAction : MonoBehaviour
         // ❌ Pet not present
         if (!GameState.Instance.petPresent)
         {
-            if (dialogue != null)
-                dialogue.SayFinalLocked(); // reuse line like "Scan me first!"
-            return;
+            UIManager ui = FindObjectOfType<UIManager>();
+            if (ui != null)
+            {
+                ui.ShowInstruction("Scan your pet card first!");
+            }
+
         }
 
         // ❌ Final evolution reached → lock mood logging

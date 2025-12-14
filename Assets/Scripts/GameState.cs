@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,19 +13,21 @@ public class GameState : MonoBehaviour
     public int toy = 0;
 
     [Header("Pet Stats")]
-    public int hunger = 3;          // TEMPORARILY UNUSED
+    public int hunger = 3;          // 0 = dead, max 3
     public int score = 0;
-    public bool petDead = false;    // TEMPORARILY UNUSED
+    public bool petDead = false;
+
+    [Header("UI (linked in Inspector)")]
+    public Slider hungerSlider;
+    public TMP_Text scoreText;
 
     [Header("Evolution")]
-    public int evolutionStage = 0;   // 0 = base, 1 = stage1, 2 = final
+    public int evolutionStage = 0;
     public string stage1Mood = "";
     public string stage2Mood = "";
 
     public bool evolutionJustHappened = false;
     public bool finalEvolutionJustHappened = false;
-    public bool evolutionLocked = false;
-
 
     public List<string> evolutionsCollected = new();
 
@@ -52,22 +56,59 @@ public class GameState : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        UpdateUI();
+    }
+
     // -------------------------
-    // LOG MOOD (HUNGER DISABLED)
+    // UI UPDATE
+    // -------------------------
+    void UpdateUI()
+    {
+        if (hungerSlider != null)
+            hungerSlider.value = hunger;
+
+        if (scoreText != null)
+            scoreText.text = "Score: " + score;
+    }
+
+    // -------------------------
+    // FEED PET
+    // -------------------------
+    public void FeedPet()
+    {
+        if (petDead || food <= 0) return;
+
+        food--;
+        hunger = Mathf.Clamp(hunger + 1, 0, 3);
+    }
+
+    // -------------------------
+    // PLAY WITH PET
+    // -------------------------
+    public void PlayWithPet()
+    {
+        if (petDead || toy <= 0) return;
+
+        toy--;
+        score++;
+    }
+
+    // -------------------------
+    // LOG MOOD (1 day passes)
     // -------------------------
     public void LogMood(string mood)
     {
-        if (petDead)
-            return;
+        if (petDead) return;
 
         loggedMoods.Add(mood);
         moodCounts[mood]++;
 
-        // Each mood = 1 day passing
         hunger--;
         hunger = Mathf.Clamp(hunger, 0, 3);
 
-        if (hunger == 0)
+        if (hunger <= 0)
         {
             petDead = true;
             return;
@@ -77,7 +118,7 @@ public class GameState : MonoBehaviour
     }
 
     // -------------------------
-    // EVOLUTION CHECK
+    // EVOLUTION
     // -------------------------
     void CheckEvolution()
     {
@@ -85,13 +126,9 @@ public class GameState : MonoBehaviour
             return;
 
         if (evolutionStage == 0)
-        {
             Stage1Evolution();
-        }
         else if (evolutionStage == 1)
-        {
             FinalEvolution();
-        }
     }
 
     void Stage1Evolution()
@@ -102,8 +139,6 @@ public class GameState : MonoBehaviour
 
         evolutionsCollected.Add(stage1Mood);
         ResetMoodTracking();
-
-        Debug.Log("Stage 1 Evolution: " + stage1Mood);
     }
 
     void FinalEvolution()
@@ -112,31 +147,13 @@ public class GameState : MonoBehaviour
         evolutionStage = 2;
         finalEvolutionJustHappened = true;
 
-        string finalKey = GetFinalMoodKey();
-        evolutionsCollected.Add(finalKey);
+        evolutionsCollected.Add(GetFinalMoodKey());
         ResetMoodTracking();
-
-        Debug.Log("Final Evolution: " + finalKey);
     }
 
-    // -------------------------
-    // HELPERS
-    // -------------------------
     string GetHighestMood()
     {
-        string highest = "";
-        int max = -1;
-
-        foreach (var pair in moodCounts)
-        {
-            if (pair.Value > max)
-            {
-                max = pair.Value;
-                highest = pair.Key;
-            }
-        }
-
-        return highest;
+        return moodCounts.OrderByDescending(x => x.Value).First().Key;
     }
 
     void ResetMoodTracking()
@@ -147,21 +164,20 @@ public class GameState : MonoBehaviour
         moodCounts["calm"] = 0;
     }
 
-    // 🔑 ORDER-INDEPENDENT FINAL KEY
     public string GetFinalMoodKey()
     {
         List<string> moods = new() { stage1Mood, stage2Mood };
-        moods.Sort(); // alphabetical
+        moods.Sort();
         return $"{moods[0]}_{moods[1]}";
     }
 
-    // -------------------------
-    // RESET PET
-    // -------------------------
     public void ResetPet()
     {
         food = 0;
         toy = 0;
+        hunger = 3;
+        score = 0;
+        petDead = false;
 
         evolutionStage = 0;
         stage1Mood = "";
@@ -170,15 +186,6 @@ public class GameState : MonoBehaviour
         evolutionJustHappened = false;
         finalEvolutionJustHappened = false;
 
-        // Allow mood logging again
-        // (if you later re-add locking logic)
-        // evolutionLocked = false;
-
         ResetMoodTracking();
-
-        Debug.Log("Pet reset. Evolution history preserved.");
     }
-
-    
-
 }
