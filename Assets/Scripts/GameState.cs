@@ -22,6 +22,8 @@ public class GameState : MonoBehaviour
 
     public bool evolutionJustHappened = false;
     public bool finalEvolutionJustHappened = false;
+    public bool evolutionLocked = false;
+
 
     public List<string> evolutionsCollected = new();
 
@@ -155,6 +157,15 @@ public class GameState : MonoBehaviour
         evolutionJustHappened = false;
         finalEvolutionJustHappened = false;
 
+        // Allow mood logging again
+        // (if you later re-add locking logic)
+        // evolutionLocked = false;
+
         ResetMoodTracking();
+
+        Debug.Log("Pet reset. Evolution history preserved.");
     }
+
+    
+
 }

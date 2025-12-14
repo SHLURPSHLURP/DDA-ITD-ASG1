@@ -7,33 +7,98 @@ public class InfoPanelUI : MonoBehaviour
     [Header("UI")]
     public TMP_Text usernameText;
     public TMP_Text moodListText;
+    public TMP_Text evolutionListText;
 
     void OnEnable()
     {
         Refresh();
     }
 
-    // Call this whenever data changes
+    // -------------------------
+    // REFRESH UI
+    // -------------------------
     public void Refresh()
     {
-        // Placeholder username
+        // Username (placeholder)
         usernameText.text = "Username: Guest";
 
-        // Build mood list
-        StringBuilder sb = new StringBuilder();
-        sb.AppendLine("Logged Moods:");
+        // -------------------------
+        // LOGGED MOODS
+        // -------------------------
+        StringBuilder moodSB = new StringBuilder();
+        moodSB.AppendLine("Logged Moods:");
 
-        foreach (string mood in GameState.Instance.loggedMoods)
+        if (GameState.Instance.loggedMoods.Count == 0)
         {
-            sb.AppendLine("- " + Capitalize(mood));
+            moodSB.AppendLine("- None");
+        }
+        else
+        {
+            foreach (string mood in GameState.Instance.loggedMoods)
+            {
+                moodSB.AppendLine("- " + Capitalize(mood));
+            }
         }
 
-        moodListText.text = sb.ToString();
+        moodListText.text = moodSB.ToString();
+
+        // -------------------------
+        // EVOLUTION HISTORY
+        // -------------------------
+        StringBuilder evoSB = new StringBuilder();
+        evoSB.AppendLine("Evolutions Collected:");
+
+        if (GameState.Instance.evolutionsCollected.Count == 0)
+        {
+            evoSB.AppendLine("- None");
+        }
+        else
+        {
+            foreach (string evo in GameState.Instance.evolutionsCollected)
+            {
+                evoSB.AppendLine("- " + FormatEvolutionName(evo));
+            }
+        }
+
+        evolutionListText.text = evoSB.ToString();
     }
 
+    // -------------------------
+    // BUTTON ACTIONS
+    // -------------------------
+    public void ResetPetButton()
+    {
+        GameState.Instance.ResetPet();
+        Refresh();
+    }
+
+    // -------------------------
+    // HELPERS
+    // -------------------------
     string Capitalize(string s)
     {
         if (string.IsNullOrEmpty(s)) return s;
         return char.ToUpper(s[0]) + s.Substring(1);
+    }
+
+    string FormatEvolutionName(string key)
+    {
+        return key switch
+        {
+            // Stage 1 
+            "happy" => "Bright",
+            "sad" => "Somber",
+            "calm" => "Serene",
+
+            // Final evolutions
+            "happy_happy" => "Joyful",
+            "sad_sad" => "Sorrowful",
+            "calm_calm" => "Tranquil",
+            "happy_sad" => "Bittersweet",
+            "happy_calm" => "Content",
+            "calm_sad" => "Resigned",
+
+            _ => key
+        };
     }
 }

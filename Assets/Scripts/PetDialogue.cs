@@ -10,8 +10,9 @@ public class PetDialogue : MonoBehaviour
     public string[] idleLines;
     public float idleInterval = 3f;
 
-    [Header("Mood Response")]
+    [Header("Overrides")]
     public string moodLoggedLine = "I'll remember that :)";
+    public string finalLockedLine = "I think I've grown enough for now.";
 
     private Coroutine idleCoroutine;
 
@@ -21,7 +22,7 @@ public class PetDialogue : MonoBehaviour
     }
 
     // ------------------------
-    // IDLE DIALOGUE
+    // IDLE
     // ------------------------
     void StartIdleDialogue()
     {
@@ -44,19 +45,29 @@ public class PetDialogue : MonoBehaviour
     }
 
     // ------------------------
-    // TEMPORARY OVERRIDE
+    // TEMP OVERRIDES
     // ------------------------
     public void SayMoodLogged()
+    {
+        OverrideLine(moodLoggedLine);
+    }
+
+    public void SayFinalLocked()
+    {
+        OverrideLine(finalLockedLine);
+    }
+
+    void OverrideLine(string line)
     {
         if (idleCoroutine != null)
             StopCoroutine(idleCoroutine);
 
-        StartCoroutine(MoodLoggedRoutine());
+        StartCoroutine(OverrideRoutine(line));
     }
 
-    IEnumerator MoodLoggedRoutine()
+    IEnumerator OverrideRoutine(string line)
     {
-        textBox.text = moodLoggedLine;
+        textBox.text = line;
         yield return new WaitForSeconds(2f);
         StartIdleDialogue();
     }

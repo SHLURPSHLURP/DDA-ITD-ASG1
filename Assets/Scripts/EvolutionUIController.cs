@@ -28,12 +28,15 @@ public class EvolutionUIController : MonoBehaviour
         }
     }
 
+    // -------------------------
+    // STAGE 1
+    // -------------------------
     void ShowStage1()
     {
         stage1Panel.SetActive(true);
 
         string mood = GameState.Instance.stage1Mood;
-        stage1NameText.text = mood.ToUpper();
+        stage1NameText.text = GetStage1Name(mood);
 
         stage1DescText.text = mood switch
         {
@@ -44,14 +47,17 @@ public class EvolutionUIController : MonoBehaviour
         };
     }
 
+    // -------------------------
+    // FINAL EVOLUTION
+    // -------------------------
     void ShowFinal()
     {
         finalPanel.SetActive(true);
 
-        string finalName = GameState.Instance.stage1Mood + GameState.Instance.stage2Mood;
-        finalNameText.text = finalName.ToUpper();
+        string key = GameState.Instance.GetFinalMoodKey();
+        finalNameText.text = GetFinalName(key);
 
-        finalDescText.text = "Your pet has reached its final form.";
+        finalDescText.text = "Your pet has reached its final emotional form.";
     }
 
     // -------------------------
@@ -62,9 +68,49 @@ public class EvolutionUIController : MonoBehaviour
         stage1Panel.SetActive(false);
     }
 
+    // 🔑 NEW: SEE PET BUTTON
+    public void ConfirmFinalEvolution()
+    {
+        finalPanel.SetActive(false);
+
+        // Do NOT reset pet
+        // Pet stays in final form
+        // Mood logging already stops naturally after final
+
+        Debug.Log("Final evolution confirmed. Pet can now be viewed.");
+    }
+
     public void ResetPetFromFinal()
     {
         GameState.Instance.ResetPet();
         finalPanel.SetActive(false);
+    }
+
+    // -------------------------
+    // NAME HELPERS
+    // -------------------------
+    string GetStage1Name(string mood)
+    {
+        return mood switch
+        {
+            "happy" => "Bright",
+            "sad" => "Somber",
+            "calm" => "Serene",
+            _ => mood.ToUpper()
+        };
+    }
+
+    string GetFinalName(string key)
+    {
+        return key switch
+        {
+            "happy_happy" => "Joyful",
+            "sad_sad" => "Sorrowful",
+            "calm_calm" => "Tranquil",
+            "happy_sad" => "Bittersweet",
+            "happy_calm" => "Content",
+            "calm_sad" => "Resigned",
+            _ => key.ToUpper()
+        };
     }
 }

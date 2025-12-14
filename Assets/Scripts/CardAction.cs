@@ -42,20 +42,31 @@ public class CardAction : MonoBehaviour
 
     void HandleLogMood()
     {
+        PetDialogue dialogue = FindObjectOfType<PetDialogue>();
+
+        // ❌ Pet not present
         if (!GameState.Instance.petPresent)
         {
-            Debug.Log("Pet not present. Scan PetCard first.");
+            if (dialogue != null)
+                dialogue.SayFinalLocked(); // reuse line like "Scan me first!"
+            return;
+        }
+
+        // ❌ Final evolution reached → lock mood logging
+        if (GameState.Instance.evolutionStage >= 2)
+        {
+            if (dialogue != null)
+                dialogue.SayFinalLocked(); // "I've grown enough for now"
             return;
         }
 
         if (string.IsNullOrEmpty(mood))
             return;
 
-        // ✅ Log mood (this also checks evolution)
+        // ✅ Log mood (this also checks evolution internally)
         GameState.Instance.LogMood(mood);
 
-        // Pet dialogue
-        PetDialogue dialogue = FindObjectOfType<PetDialogue>();
+        // Pet dialogue reaction
         if (dialogue != null)
             dialogue.SayMoodLogged();
 
