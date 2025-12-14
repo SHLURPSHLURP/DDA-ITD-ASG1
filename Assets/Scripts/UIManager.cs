@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject loginPanel;
     public GameObject signupPanel;
     public GameObject homePanel;
-    public GameObject infoPanel;
+
 
 
     void Start()
@@ -27,7 +27,6 @@ public class UIManager : MonoBehaviour
         loginPanel.SetActive(false);
         signupPanel.SetActive(false);
         homePanel.SetActive(false);
-        infoPanel.SetActive(false);
 
         panel.SetActive(true);
     }
@@ -53,8 +52,5 @@ public class UIManager : MonoBehaviour
         ShowOnly(homePanel);
     }
 
-    public void ShowInfoPanel()
-    {
-        ShowOnly(infoPanel);
-    }
+
 }

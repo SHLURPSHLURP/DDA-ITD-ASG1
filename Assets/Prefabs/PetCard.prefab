@@ -584,6 +584,7 @@ MonoBehaviour:
   - Remember to feed me...
   idleInterval: 3
   moodLoggedLine: I'll remember that :)
+  finalLockedLine: I think I've grown enough for now.
 --- !u!1 &5235723478579765782
 GameObject:
   m_ObjectHideFlags: 0
