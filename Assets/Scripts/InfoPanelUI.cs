@@ -1,3 +1,8 @@
+/// 
+/// to control info panel UI
+/// Made by Gracie Arianne Peh (S10265899G) 13/12/25
+/// 
+
 using UnityEngine;
 using TMPro;
 using System.Text;
@@ -6,7 +11,7 @@ using Firebase.Auth;
 
 public class InfoPanelUI : MonoBehaviour
 {
-    [Header("UI")]
+
     public TMP_Text userIdText;
     public TMP_Text emailText;
     public TMP_Text moodListText;
@@ -17,14 +22,12 @@ public class InfoPanelUI : MonoBehaviour
         Refresh();
     }
 
-    // -------------------------
+
     // REFRESH UI
-    // -------------------------
     public void Refresh()
     {
-        // -------------------------
+
         // AUTH INFO (UID + EMAIL)
-        // -------------------------
         FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
 
         if (user != null)
@@ -39,9 +42,8 @@ public class InfoPanelUI : MonoBehaviour
         }
 
 
-        // -------------------------
+
         // LOGGED MOODS
-        // -------------------------
         StringBuilder moodSB = new StringBuilder();
         moodSB.AppendLine("Logged Moods:");
 
@@ -59,9 +61,7 @@ public class InfoPanelUI : MonoBehaviour
 
         moodListText.text = moodSB.ToString();
 
-        // -------------------------
         // EVOLUTION HISTORY
-        // -------------------------
         StringBuilder evoSB = new StringBuilder();
         evoSB.AppendLine("Evolutions Collected:");
 
@@ -80,18 +80,15 @@ public class InfoPanelUI : MonoBehaviour
         evolutionListText.text = evoSB.ToString();
     }
 
-    // -------------------------
+
     // BUTTON ACTIONS
-    // -------------------------
     public void ResetPetButton()
     {
         GameState.Instance.ResetPetAndSave();
         Refresh();
     }
 
-    // -------------------------
     // HELPERS
-    // -------------------------
     string Capitalize(string s)
     {
         if (string.IsNullOrEmpty(s)) return s;

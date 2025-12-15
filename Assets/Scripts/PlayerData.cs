@@ -1,3 +1,8 @@
+/// DDA FIREBASE PORTION
+/// Script to create class
+/// Made by Gracie Arianne Peh (S10265899G) 14/12/25
+/// 
+
 using System.Collections.Generic;
 
 [System.Serializable]

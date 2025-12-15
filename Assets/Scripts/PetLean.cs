@@ -11,7 +11,7 @@ public class PetLean : MonoBehaviour
     public float leanAmount = 10f;
     public float leanSpeed = 5f;
 
-    void Update()
+    void Update() //lean towards food
     {
         bool foodExists = GameObject.FindWithTag("FoodClone") != null;
 

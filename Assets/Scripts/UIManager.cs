@@ -1,17 +1,22 @@
+/// 
+/// script to handle the main UI navigation
+/// Made by Gracie Arianne Peh (S10265899G) 11/12/25
+/// 
+
 using UnityEngine;
 using TMPro;
 using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Main Panels")]
+//MAIN NAVIGATION
     public GameObject startPanel;
     public GameObject loginPanel;
     public GameObject signupPanel;
     public GameObject homePanel;
     public GameObject instructionsPanel;
 
-    [Header("Overlays")]
+//OVERLAYS
     public GameObject deathPanel;
     public TMP_Text instructionText;
 
@@ -27,16 +32,15 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        // 🔴 Death check (global)
+        // Death check (global)
         if (deathPanel != null)
         {
             deathPanel.SetActive(GameState.Instance.petDead);
         }
     }
 
-    // -------------------------
+
     // PANEL SWITCHING
-    // -------------------------
     private void ShowOnly(GameObject panel)
     {
         startPanel.SetActive(false);
@@ -53,9 +57,8 @@ public class UIManager : MonoBehaviour
     public void ShowHomePanel() => ShowOnly(homePanel);
     public void ShowInstructionPanel() => ShowOnly(instructionsPanel);
 
-    // -------------------------
+
     // INSTRUCTION TEXT
-    // -------------------------
     public void ShowInstruction(string message, float duration = 2f)
     {
         if (instructionRoutine != null)
@@ -77,9 +80,8 @@ public class UIManager : MonoBehaviour
         instructionText.gameObject.SetActive(false);
     }
 
-    // -------------------------
+
     // DEATH PANEL BUTTON
-    // -------------------------
     public void ResetPetFromDeath()
     {
         GameState.Instance.ResetPet();

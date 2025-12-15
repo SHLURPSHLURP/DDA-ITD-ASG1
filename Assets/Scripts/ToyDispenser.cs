@@ -1,14 +1,20 @@
+/// 
+/// script to control the TOY dispenser (to spawn cloned tpy)
+/// Made by Gracie Arianne Peh (S10265899G) 11/12/25
+/// DUPE OF FOOD COUNTERPART WITH CHANGES FOR TOY
+/// 
+
 using UnityEngine;
 
 public class ToyDispenser : MonoBehaviour
 {
     public GameObject toyClonePrefab;
 
-    [Header("Pet References (drag from PetCard)")]
+//PET REFERENCES FOR LOCATION OF WHERE FOOD SHOULD BE DETECTED AND WHAT ANIMATION PET CARRIES OUT
     public Transform snapZone;
     public PetSpinReaction petSpin;
 
-    public void SpawnToy()
+    public void SpawnToy() //SPAWN FOOD CLONE THEN CALL FOODCONSUMEONRELEASE AND CONTROL PET REACTION
     {
         if (GameState.Instance.toy <= 0)
             return;

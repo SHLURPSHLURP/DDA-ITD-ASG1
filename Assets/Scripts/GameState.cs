@@ -1,3 +1,11 @@
+/// SOME DDA FIREBASE PORTION
+/// important central script which other scripts call on; 
+/// manages all game data and also linked to firebaseplayermanager for database management
+/// 
+/// Made by Gracie Arianne Peh (S10265899G) 11/12/25
+/// ChatGPT for references (muiltiple) and debugging
+/// 
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,41 +16,39 @@ public class GameState : MonoBehaviour
 {
     public static GameState Instance;
 
-    [Header("Resources")]
+//FOOD RESOURCES
     public int food = 0;
     public int toy = 0;
 
-    [Header("Pet Stats")]
+//PET STATS
     public int hunger = 3;          // 0 = dead, max 3
     public int score = 0;
     public bool petDead = false;
 
-    [Header("UI (linked in Inspector)")]
+//UI
     public Slider hungerSlider;
     public TMP_Text scoreText;
     public Slider evolutionProgressSlider;
 
 
-    [Header("Evolution")]
+//EVOLUTION AND MOOD 
     public int evolutionStage = 0;
     public string stage1Mood = "";
     public string stage2Mood = "";
-
     public bool evolutionJustHappened = false;
     public bool finalEvolutionJustHappened = false;
-
     public List<string> evolutionsCollected = new();
 
-    [Header("Mood Tracking")]
+//MOOD TRACKING
     public List<string> loggedMoods = new();
-    public Dictionary<string, int> moodCounts = new()
+    public Dictionary<string, int> moodCounts = new() //TO LOG ALL MOODS AND DISPLAY
     {
         { "happy", 0 },
         { "sad", 0 },
         { "calm", 0 }
     };
 
-    [Header("AR State")]
+//IS PET PRESENT????
     public bool petPresent = false;
 
     void Awake()
@@ -73,9 +79,8 @@ public class GameState : MonoBehaviour
         UpdateUI();
     }
 
-    // -------------------------
-    // UI UPDATE
-    // -------------------------
+
+    // UPDATE UI
     void UpdateUI()
     {
         if (hungerSlider != null)
@@ -88,9 +93,8 @@ public class GameState : MonoBehaviour
             evolutionProgressSlider.value = loggedMoods.Count;
     }
 
-    // -------------------------
-    // FEED PET
-    // -------------------------
+
+    // FEED PET AND UPDATE FIREBASE
     public void FeedPet()
     {
         if (petDead || food <= 0) return;
@@ -102,9 +106,8 @@ public class GameState : MonoBehaviour
 
     }
 
-    // -------------------------
-    // PLAY WITH PET
-    // -------------------------
+
+    // PLAY WITH PET AND UPDATE FIREBASE
     public void PlayWithPet()
     {
         if (petDead || toy <= 0) return;
@@ -116,9 +119,8 @@ public class GameState : MonoBehaviour
 
     }
 
-    // -------------------------
-    // LOG MOOD (1 day passes)
-    // -------------------------
+    // LOG MOOD (1 day passes) AND FIREBASE UPDATE
+
     public void LogMood(string mood)
     {
         if (petDead) return;
@@ -140,9 +142,10 @@ public class GameState : MonoBehaviour
         FirebasePlayerManager.Instance.SaveFromGameState(); //FIREBASE CRUD
     }
 
-    // -------------------------
-    // EVOLUTION
-    // -------------------------
+
+    // EVOLUTION LOGIC: if mood is logged 10 times (prototyped 10 days), the mood logged the most is stage 1 evo
+    // after stage 1, mood is logged 10 more times and mood logged most is put together with stage 1 to form stage 2 (final)
+
     void CheckEvolution()
     {
         if (loggedMoods.Count < 10)
@@ -179,7 +182,7 @@ public class GameState : MonoBehaviour
         return moodCounts.OrderByDescending(x => x.Value).First().Key;
     }
 
-    void ResetMoodTracking()
+    void ResetMoodTracking() //TO MOVE ON TO STAGE 1
     {
         loggedMoods.Clear();
         moodCounts["happy"] = 0;
@@ -222,7 +225,7 @@ public class GameState : MonoBehaviour
 
 
 
-        public PlayerData ToPlayerData()
+        public PlayerData ToPlayerData() //CREATING NEW PLAYER NODE USING AUTH UID
     {
         PlayerData data = new PlayerData();
 
@@ -243,7 +246,7 @@ public class GameState : MonoBehaviour
         return data;
     }
 
-    public void LoadFromPlayerData(PlayerData data)
+    public void LoadFromPlayerData(PlayerData data) //LOADING PLAYER NODE USING AUTH ID
     {
         evolutionStage = data.evolutionStage;
         stage1Mood = data.stage1Mood;

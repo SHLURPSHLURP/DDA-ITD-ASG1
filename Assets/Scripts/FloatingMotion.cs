@@ -1,7 +1,6 @@
 /// 
-/// Script to make pet move a little but so it doesnt look so dead...
+/// tiny Script to make pet move a little but so it doesnt look so dead...
 /// Made by Gracie Arianne Peh (S10265899G) 10/12/25 
-/// Some reference to ChatGPT (i couldnt figure some stuff out)
 /// 
 
 

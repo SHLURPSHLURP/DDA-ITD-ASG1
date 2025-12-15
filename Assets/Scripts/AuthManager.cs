@@ -1,3 +1,9 @@
+/// DDA FIREBASE PORTION
+/// Script to handle creation and logging in of account using firebase auth 
+/// Made by Gracie Arianne Peh (S10265899G) 12/12/25
+/// 
+
+
 using UnityEngine;
 using Firebase.Auth;
 using Firebase.Extensions;
@@ -5,21 +11,20 @@ using TMPro;
 
 public class AuthManager : MonoBehaviour
 {
-    [Header("Login")]
+//FIELDS FOR SIGN IN
     public TMP_InputField loginEmail;
     public TMP_InputField loginPassword;
     public TMP_Text loginErrorText;
 
-    [Header("Signup")]
+// FIELDS FOR SIGN UP
     public TMP_InputField signupEmail;
     public TMP_InputField signupPassword;
     public TMP_Text signupErrorText;
 
+//TO CONNECT TO HOMEPAGE
     public UIManager uiManager;
 
-    // =========================
-    // LOGIN
-    // =========================
+    // LOG IN (CALL METHOD FROM FIREBASEPLAYERMANAGER TO LOAD DATABASE NODE USING AUTH GENERATED UID) THEN GO TO HOME PANEL 
     public void LogIn()
     {
         loginErrorText.text = "";
@@ -37,16 +42,13 @@ public class AuthManager : MonoBehaviour
                     return;
                 }
 
-                Debug.Log("Login success.");
-
                 FirebasePlayerManager.Instance.LoadExistingPlayer();
                 uiManager.ShowHomePanel();
             });
     }
 
-    // =========================
-    // SIGN UP
-    // =========================
+  
+    // SIGN UP (CALL METHOD FROM FIREBASEPLAYERMANAGER TO CREATE NEW DATABASE NODE USING AUTH GENERATED UID) THEN GO TO HOME PANEL 
     public void CreateAccount()
     {
         signupErrorText.text = "";
@@ -63,8 +65,6 @@ public class AuthManager : MonoBehaviour
                     signupErrorText.text = "Signup failed.";
                     return;
                 }
-
-                Debug.Log("Account created.");
 
                 FirebasePlayerManager.Instance.InitializeNewPlayer();
                 uiManager.ShowHomePanel();

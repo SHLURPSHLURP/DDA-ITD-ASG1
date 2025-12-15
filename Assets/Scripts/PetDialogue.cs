@@ -1,3 +1,8 @@
+/// 
+/// script for ui above pet to constantly change to new idle line using coroutine (or overriden line if triggered)
+/// Made by Gracie Arianne Peh (S10265899G) 13/12/25
+/// 
+
 using UnityEngine;
 using TMPro;
 using System.Collections;
@@ -6,11 +11,11 @@ public class PetDialogue : MonoBehaviour
 {
     public TMP_Text textBox;
 
-    [Header("Idle Dialogue")]
+//IDLE DIALOGUE
     public string[] idleLines;
     public float idleInterval = 3f;
 
-    [Header("Overrides")]
+//OVERRIDES
     public string moodLoggedLine = "I'll remember that :)";
     public string finalLockedLine = "I think I've grown enough for now.";
 
@@ -21,9 +26,7 @@ public class PetDialogue : MonoBehaviour
         StartIdleDialogue();
     }
 
-    // ------------------------
     // IDLE
-    // ------------------------
     void StartIdleDialogue()
     {
         if (idleCoroutine != null)
@@ -44,9 +47,8 @@ public class PetDialogue : MonoBehaviour
         }
     }
 
-    // ------------------------
-    // TEMP OVERRIDES
-    // ------------------------
+
+    // TEMP OVERRIDES FOR TRIGGERS THAT REQUIRE PET TO SAY SOMETHING OUT OF USUAL DIALOGUE
     public void SayMoodLogged()
     {
         OverrideLine(moodLoggedLine);

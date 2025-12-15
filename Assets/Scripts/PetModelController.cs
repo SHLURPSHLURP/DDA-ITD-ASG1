@@ -1,16 +1,22 @@
+/// 
+/// Script to handle pet prefabs changing according to evolution
+/// Made by Gracie Arianne Peh (S10265899G) 14/12/25
+/// chatgpt reference
+/// 
+
 using UnityEngine;
 
 public class PetModelController : MonoBehaviour
 {
-    [Header("Base")]
+
     public GameObject baseModel;
 
-    [Header("Stage 1")]
+
     public GameObject brightModel;   // happy
     public GameObject somberModel;   // sad
     public GameObject sereneModel;   // calm
 
-    [Header("Final Evolutions")]
+
     public GameObject joyfulModel;        // happy_happy
     public GameObject sorrowfulModel;     // sad_sad
     public GameObject tranquilModel;      // calm_calm
@@ -20,18 +26,18 @@ public class PetModelController : MonoBehaviour
 
     int lastStage = -1;
 
-    void Start()
+    void Start() //APPLY CORRECT MODEL ACCORDING TO LOADED DATA
     {
         ApplyModel();
     }
 
-    void Update()
+    void Update() //CHECK IF EVO STAGE IS CHANGE
     {
         if (GameState.Instance.evolutionStage != lastStage)
             ApplyModel();
     }
 
-    void ApplyModel()
+    void ApplyModel() //CHANGE MODEL ACCORDING TO STAGE
     {
         lastStage = GameState.Instance.evolutionStage;
         DisableAll();
@@ -70,7 +76,7 @@ public class PetModelController : MonoBehaviour
         }
     }
 
-    void DisableAll()
+    void DisableAll() //DISABLE OTHER MODELS
     {
         baseModel.SetActive(false);
 

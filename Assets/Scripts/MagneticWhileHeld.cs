@@ -1,3 +1,8 @@
+/// 
+/// for food and toy clones that are grabbed and "snap" lightly to pet
+/// Made by Gracie Arianne Peh (S10265899G) 13/12/25
+/// 
+
 using UnityEngine;
 
 
@@ -9,7 +14,7 @@ public class MagneticWhileHeld : MonoBehaviour
     Transform snapZone;
     UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grab;
 
-    void Awake()
+    void Awake() //FIND SNAP ZONE
     {
         grab = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
         GameObject snapObj = GameObject.Find("SnapZone");
@@ -17,7 +22,7 @@ public class MagneticWhileHeld : MonoBehaviour
             snapZone = snapObj.transform;
     }
 
-    void Update()
+    void Update() //SNAP TO SNAP ZONE
     {
         if (!grab.isSelected || snapZone == null) return;
 

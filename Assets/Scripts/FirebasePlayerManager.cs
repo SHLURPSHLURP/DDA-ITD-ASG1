@@ -1,3 +1,8 @@
+/// DDA FIREBASE PORTION
+/// script to handle firebase CRUD based on auth generated UID
+/// Made by Gracie Arianne Peh (S10265899G) 14/12/25
+/// 
+
 using UnityEngine;
 using Firebase.Database;
 using Firebase.Auth;
@@ -28,9 +33,9 @@ public class FirebasePlayerManager : MonoBehaviour
         dbRef = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
-    // =========================
+
     // LOGIN → LOAD EXISTING
-    // =========================
+
     public async void LoadExistingPlayer()
     {
         if (auth.CurrentUser == null)
@@ -60,9 +65,9 @@ public class FirebasePlayerManager : MonoBehaviour
         }
     }
 
-    // =========================
+
     // SIGN UP → CREATE NEW
-    // =========================
+
     public void InitializeNewPlayer()
     {
         if (auth.CurrentUser == null)
@@ -77,9 +82,9 @@ public class FirebasePlayerManager : MonoBehaviour
         Debug.Log("New player initialized.");
     }
 
-    // =========================
+
     // SAVE
-    // =========================
+
     public void SaveFromGameState()
     {
         if (auth.CurrentUser == null) return;

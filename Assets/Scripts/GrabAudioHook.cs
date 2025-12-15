@@ -1,3 +1,9 @@
+/// 
+/// small script to be able to link audio to spawned prefabs as im unable to link from scene
+/// Made by Gracie Arianne Peh (S10265899G) 15/12/25
+/// ChatGPT generated
+/// 
+
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 

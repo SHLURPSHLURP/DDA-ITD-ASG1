@@ -1,9 +1,15 @@
+/// 
+/// Script for pet to pulse when mood is logged
+/// Made by Gracie Arianne Peh (S10265899G) 12/12/25
+/// chatgpt reference
+/// 
+
 using UnityEngine;
 using System.Collections;
 
 public class PetScalePulse : MonoBehaviour
 {
-    public float pulseScale = 1.05f;   // subtle but visible
+    public float pulseScale = 1.05f;   
     public float pulseDuration = 0.25f;
     public float pauseBetweenPulses = 0.08f;
 
@@ -15,7 +21,7 @@ public class PetScalePulse : MonoBehaviour
         originalScale = transform.localScale;
     }
 
-    public void PlayPulse()
+    public void PlayPulse() //TO CALL FROM OTHER SCRIPTS/OBJECTS
     {
         if (!isPulsing)
             StartCoroutine(DoublePulseRoutine());

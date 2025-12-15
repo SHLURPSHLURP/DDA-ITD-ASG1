@@ -1,3 +1,9 @@
+/// SOME DDA FIREBASE INSIDE (CALLING FIREBASEMANAGER TO UPDATE FIREBASE FOR TOY AND FOOD)
+/// script for spawned prefabs on card and what they do
+/// Made by Gracie Arianne Peh (S10265899G) 11/12/25
+/// Some reference to ChatGPT
+/// 
+
 using UnityEngine;
 
 public class CardAction : MonoBehaviour
@@ -12,10 +18,9 @@ public class CardAction : MonoBehaviour
 
     public CardActionType actionType;
 
-    [Header("Mood Only")]
     public string mood;
 
-    public void ExecuteAction()
+    public void ExecuteAction() //TO CARRY OUT THE LISTED ACTION (EITHER LOGGIN MOOD OR COLLECTION, ALSO PLAYING SOUND AND UPDATING DATABASE)
     {
         switch (actionType)
         {
@@ -41,9 +46,9 @@ public class CardAction : MonoBehaviour
 
     void HandleLogMood()
     {
-        PetDialogue dialogue = FindObjectOfType<PetDialogue>();
+        PetDialogue dialogue = FindObjectOfType<PetDialogue>(); //CALLING PETDIALOGUE OBJECT TO BE ABLE TO CHANGE IT
 
-        // ❌ Pet not present
+        // IF PET NOT PRESENT
         if (!GameState.Instance.petPresent)
         {
             UIManager ui = FindObjectOfType<UIManager>();
@@ -55,18 +60,18 @@ public class CardAction : MonoBehaviour
 
         }
 
-        // ❌ Final evolution reached → lock mood logging
+        // LOCK MOOD LOGGING AFTER FINAL EVOLUTION STAGE REACHED AND RELEVANT SCRIPTS TO INDICATE SO
         if (GameState.Instance.evolutionStage >= 2)
         {
             if (dialogue != null)
-                dialogue.SayFinalLocked(); // "I've grown enough for now"
+                dialogue.SayFinalLocked(); 
             return;
         }
 
         if (string.IsNullOrEmpty(mood))
             return;
 
-        // ✅ Log mood (this also checks evolution internally)
+        //UPDATE MOODS LOGGED AND PLAY SOUND (REFERENCING GAME STATE AND AUDIO MANAGER)
         GameState.Instance.LogMood(mood);
         AudioManager.Instance.PlayDing();
 

@@ -1,19 +1,24 @@
+/// 
+/// script to check for then automatically change to relevant panels during evolution
+/// Made by Gracie Arianne Peh (S10265899G) 12/12/25
+/// 
+
 using UnityEngine;
 using TMPro;
 
 public class EvolutionUIController : MonoBehaviour
 {
-    [Header("Stage 1 UI")]
+    //LINK TO STAGE 1 EVO UI
     public GameObject stage1Panel;
     public TMP_Text stage1NameText;
     public TMP_Text stage1DescText;
 
-    [Header("Final Evolution UI")]
+    //LINK TO FINAL EVO UI
     public GameObject finalPanel;
     public TMP_Text finalNameText;
     public TMP_Text finalDescText;
 
-    void Update()
+    void Update() //TO CONSTANTLY CHECK IF UPDATE HAPPENED AND WHAT TO DO
     {
         if (GameState.Instance.evolutionJustHappened)
         {
@@ -28,10 +33,8 @@ public class EvolutionUIController : MonoBehaviour
         }
     }
 
-    // -------------------------
-    // STAGE 1
-    // -------------------------
-    void ShowStage1()
+
+    void ShowStage1() //FIRST STAGE EVOLUTION PAGE --> SHOWS THE NAME AND CORRESSPONDING DESC
     {
         stage1Panel.SetActive(true);
 
@@ -42,14 +45,13 @@ public class EvolutionUIController : MonoBehaviour
         {
             "happy" => "Your pet feels bright and joyful.",
             "sad" => "Your pet has grown more sensitive.",
-            "calm" => "Your pet has found inner peace.",
+            "calm" => "Your pet is calmer.",
             _ => "Your pet has evolved."
         };
     }
 
-    // -------------------------
-    // FINAL EVOLUTION
-    // -------------------------
+ 
+    // FINAL EVOLUTION PAGE--> SHOWS NAME AND DESC
     void ShowFinal()
     {
         finalPanel.SetActive(true);
@@ -57,38 +59,33 @@ public class EvolutionUIController : MonoBehaviour
         string key = GameState.Instance.GetFinalMoodKey();
         finalNameText.text = GetFinalName(key);
 
-        finalDescText.text = "Your pet has reached its final emotional form.";
+        finalDescText.text = "Your pet has reached its final evolution, thank you for taking care of MoodyPet :) ";
     }
 
-    // -------------------------
-    // BUTTON HOOKS
-    // -------------------------
+  
+    // TO CONTINUE: OPEN HOME PANEL 
     public void ContinueFromStage1()
     {
         stage1Panel.SetActive(false);
     }
 
-    // 🔑 NEW: SEE PET BUTTON
+    // SEE PET WITHOUT RESETTING IT FIRST
     public void ConfirmFinalEvolution()
     {
         finalPanel.SetActive(false);
-
-        // Do NOT reset pet
-        // Pet stays in final form
-        // Mood logging already stops naturally after final
-
         Debug.Log("Final evolution confirmed. Pet can now be viewed.");
     }
 
-    public void ResetPetFromFinal()
+    //RESET PET--> CLEAR LOGGED MOODS AND STAGE EVOLUTION IF THERE IS
+    public void ResetPetFromFinal() 
     {
         GameState.Instance.ResetPet();
         finalPanel.SetActive(false);
     }
 
-    // -------------------------
-    // NAME HELPERS
-    // -------------------------
+
+    // NAME HELPERS--> GET PROPER EVOLUTION NAME FROM MOODS LOGGED
+
     string GetStage1Name(string mood)
     {
         return mood switch

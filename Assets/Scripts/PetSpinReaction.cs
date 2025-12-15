@@ -1,3 +1,9 @@
+/// 
+/// Script for pet to spin when fed or play
+/// Made by Gracie Arianne Peh (S10265899G) 12/12/25
+/// chatgpt reference
+/// 
+
 using UnityEngine;
 using System.Collections;
 
