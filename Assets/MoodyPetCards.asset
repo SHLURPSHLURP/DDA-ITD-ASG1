@@ -51,8 +51,8 @@ MonoBehaviour:
       m_GuidLow: 5121915737213973925
       m_GuidHigh: 1546157383655186327
     m_SerializedTextureGuid:
-      m_GuidLow: 5441540098268462447
-      m_GuidHigh: 14932952813382013705
+      m_GuidLow: 5450529354697339398
+      m_GuidHigh: 9633721442144524475
     m_Size: {x: 0.06, y: 0.06}
     m_SpecifySize: 1
     m_Name: PetCard
@@ -61,8 +61,8 @@ MonoBehaviour:
       m_GuidLow: 5275982419802945640
       m_GuidHigh: 8475401625949022866
     m_SerializedTextureGuid:
-      m_GuidLow: 3563595424969547960
-      m_GuidHigh: 13012075283569312778
+      m_GuidLow: 14574919573376116749
+      m_GuidHigh: 12495398983636691369
     m_Size: {x: 0.06, y: 0.06}
     m_SpecifySize: 1
     m_Name: FoodCard
@@ -71,8 +71,8 @@ MonoBehaviour:
       m_GuidLow: 5286500903253686518
       m_GuidHigh: 6214556751298943378
     m_SerializedTextureGuid:
-      m_GuidLow: 16272695586729825322
-      m_GuidHigh: 16618762340476877850
+      m_GuidLow: 6725235788312390915
+      m_GuidHigh: 11795247748978155960
     m_Size: {x: 0.06, y: 0.06}
     m_SpecifySize: 1
     m_Name: ToyCard

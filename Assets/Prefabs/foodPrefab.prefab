@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodClonePrefab: {fileID: 3333008003137138865, guid: 893590e51dae5a94a900860b96f78677, type: 3}
+  snapZone: {fileID: 0}
+  petSpin: {fileID: 0}
 --- !u!114 &2695163218212655449
 MonoBehaviour:
   m_ObjectHideFlags: 0

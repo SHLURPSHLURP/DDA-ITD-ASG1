@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 1931996358517739125}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.274, y: 0.5, z: -0.208}
+  m_LocalPosition: {x: 0.627, y: 0.5, z: 0.027}
   m_LocalScale: {x: 0.66766, y: 0.66766, z: 0.66766}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39bb24e2bd7a482ca08117fb44b8e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Image: {fileID: 2800000, guid: 7119142a3a6be1d41a7cc3764cb4a1e6, type: 3}
+  m_Image: {fileID: 2800000, guid: 511aad03d6515d54b8a191735523b1a3, type: 3}
   m_ImagePhysicalSizeMeters: {x: 0.5, y: 0.5}
   m_QuadMesh: {fileID: 0}
   m_QuadMaterial: {fileID: 0}
@@ -841,7 +841,7 @@ Transform:
   m_GameObject: {fileID: 4253057472063322949}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.274, y: 0.5, z: 0.813}
+  m_LocalPosition: {x: 0.655, y: 0.5, z: 0.813}
   m_LocalScale: {x: 0.66766, y: 0.66766, z: 0.66766}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -859,7 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39bb24e2bd7a482ca08117fb44b8e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Image: {fileID: 2800000, guid: 848460b86f2831740a04ca8b872d94b4, type: 3}
+  m_Image: {fileID: 2800000, guid: 78f8a80d8421ca44a92971122c9368ad, type: 3}
   m_ImagePhysicalSizeMeters: {x: 0.5, y: 0.5}
   m_QuadMesh: {fileID: 0}
   m_QuadMaterial: {fileID: 0}
@@ -1683,7 +1683,7 @@ Transform:
   m_GameObject: {fileID: 8433532166571464402}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.274, y: 0.5, z: 0.177}
+  m_LocalPosition: {x: 0.274, y: 0.5, z: 0.817}
   m_LocalScale: {x: 0.66766, y: 0.66766, z: 0.66766}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1701,7 +1701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39bb24e2bd7a482ca08117fb44b8e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Image: {fileID: 2800000, guid: 8c55fd6f3be34b8409134e3177813ccf, type: 3}
+  m_Image: {fileID: 2800000, guid: e892f2062b914ba4bb9816289cdab185, type: 3}
   m_ImagePhysicalSizeMeters: {x: 0.5, y: 0.5}
   m_QuadMesh: {fileID: 0}
   m_QuadMaterial: {fileID: 0}
