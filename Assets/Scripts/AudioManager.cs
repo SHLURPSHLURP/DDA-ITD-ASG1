@@ -1,3 +1,10 @@
+/// 
+/// Script to handle tracking multiple images
+/// Made by Gracie Arianne Peh (S10265899G) 14/12/25
+/// ChatGPT for debugging purposes because i was at my wits end
+/// 
+
+
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour

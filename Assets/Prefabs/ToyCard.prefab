@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 9191721524026476937}
   - component: {fileID: 2973913489738272837}
   - component: {fileID: 9181659241700603210}
+  - component: {fileID: 8051851429369107505}
   m_Layer: 0
   m_Name: ToyCard
   m_TagString: Untagged
@@ -244,6 +245,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8051851429369107505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803027270095509590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a3afa03348c7745a89b3719ee8be53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: {x: 0, y: 60, z: 0}
 --- !u!1 &4781156443185998199
 GameObject:
   m_ObjectHideFlags: 0
