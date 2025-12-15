@@ -1,11 +1,14 @@
 using UnityEngine;
 using TMPro;
 using System.Text;
+using Firebase.Auth;
+
 
 public class InfoPanelUI : MonoBehaviour
 {
     [Header("UI")]
-    public TMP_Text usernameText;
+    public TMP_Text userIdText;
+    public TMP_Text emailText;
     public TMP_Text moodListText;
     public TMP_Text evolutionListText;
 
@@ -19,8 +22,22 @@ public class InfoPanelUI : MonoBehaviour
     // -------------------------
     public void Refresh()
     {
-        // Username (placeholder)
-        usernameText.text = "Username: Guest";
+        // -------------------------
+        // AUTH INFO (UID + EMAIL)
+        // -------------------------
+        FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
+
+        if (user != null)
+        {
+            userIdText.text = "UID: " + user.UserId;
+            emailText.text = "Email: " + user.Email;
+        }
+        else
+        {
+            userIdText.text = "UID: -";
+            emailText.text = "Email: -";
+        }
+
 
         // -------------------------
         // LOGGED MOODS

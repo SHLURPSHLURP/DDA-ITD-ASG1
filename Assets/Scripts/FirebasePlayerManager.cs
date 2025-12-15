@@ -94,23 +94,4 @@ public class FirebasePlayerManager : MonoBehaviour
         dbRef.Child("players").Child(userId).SetRawJsonValueAsync(json);
     }
 
-    // =========================
-    // DELETE ACCOUNT
-    // =========================
-    public async void DeleteAccountAndData()
-    {
-        if (auth.CurrentUser == null)
-            return;
-
-        string uid = auth.CurrentUser.UserId;
-
-        await dbRef.Child("players").Child(uid).RemoveValueAsync();
-        await auth.CurrentUser.DeleteAsync();
-
-        GameState.Instance.ResetPet();
-
-        Debug.Log("Account and data deleted.");
-
-        FindObjectOfType<UIManager>().ShowStartPanel();
-    }
 }
