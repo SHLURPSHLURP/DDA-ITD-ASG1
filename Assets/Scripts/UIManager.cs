@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject loginPanel;
     public GameObject signupPanel;
     public GameObject homePanel;
+    public GameObject instructionsPanel;
 
     [Header("Overlays")]
     public GameObject deathPanel;
@@ -50,6 +51,7 @@ public class UIManager : MonoBehaviour
     public void ShowLoginPanel() => ShowOnly(loginPanel);
     public void ShowSignupPanel() => ShowOnly(signupPanel);
     public void ShowHomePanel() => ShowOnly(homePanel);
+    public void ShowInstructionPanel() => ShowOnly(instructionsPanel);
 
     // -------------------------
     // INSTRUCTION TEXT
