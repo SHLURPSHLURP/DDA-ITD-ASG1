@@ -25,11 +25,13 @@ public class CardAction : MonoBehaviour
 
             case CardActionType.CollectFood:
                 GameState.Instance.food++;
+                AudioManager.Instance.PlayDing();
                 FirebasePlayerManager.Instance.SaveFromGameState(); 
                 break;
 
             case CardActionType.CollectToy:
                 GameState.Instance.toy++;
+                AudioManager.Instance.PlayDing();
                 FirebasePlayerManager.Instance.SaveFromGameState();
                 break;
 
@@ -66,6 +68,8 @@ public class CardAction : MonoBehaviour
 
         // ✅ Log mood (this also checks evolution internally)
         GameState.Instance.LogMood(mood);
+        AudioManager.Instance.PlayDing();
+
 
         // Pet dialogue reaction
         if (dialogue != null)

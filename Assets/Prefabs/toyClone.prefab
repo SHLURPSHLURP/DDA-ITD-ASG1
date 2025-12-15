@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9071907595094451090}
   - component: {fileID: 2355881989768639712}
   - component: {fileID: 6831481640534998371}
+  - component: {fileID: 5571279826540887584}
   m_Layer: 0
   m_Name: toyClone
   m_TagString: ToyClone
@@ -295,3 +296,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5571279826540887584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2992837509499423532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc93c6f42047c4409485ab3f9f93ea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
