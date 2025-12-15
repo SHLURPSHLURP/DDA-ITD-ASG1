@@ -20,6 +20,8 @@ public class GameState : MonoBehaviour
     [Header("UI (linked in Inspector)")]
     public Slider hungerSlider;
     public TMP_Text scoreText;
+    public Slider evolutionProgressSlider;
+
 
     [Header("Evolution")]
     public int evolutionStage = 0;
@@ -54,6 +56,16 @@ public class GameState : MonoBehaviour
         {
             Destroy(gameObject);
         }
+     
+
+        if (evolutionProgressSlider != null) //INITIALISE SLIDER
+        {
+            evolutionProgressSlider.minValue = 0;
+            evolutionProgressSlider.maxValue = 10;
+            evolutionProgressSlider.value = loggedMoods.Count;
+        }
+
+
     }
 
     void Update()
@@ -71,6 +83,9 @@ public class GameState : MonoBehaviour
 
         if (scoreText != null)
             scoreText.text = "Score: " + score;
+
+        if (evolutionProgressSlider != null)
+            evolutionProgressSlider.value = loggedMoods.Count;
     }
 
     // -------------------------
@@ -170,6 +185,10 @@ public class GameState : MonoBehaviour
         moodCounts["happy"] = 0;
         moodCounts["sad"] = 0;
         moodCounts["calm"] = 0;
+
+        if (evolutionProgressSlider != null)
+            evolutionProgressSlider.value = 0;
+
     }
 
     public string GetFinalMoodKey()
